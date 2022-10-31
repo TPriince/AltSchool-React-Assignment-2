@@ -1,3 +1,3 @@
 # AltSchool-React-Assignment-2
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/react-8maqeb)
+[Link to assignment site ⚡️](https://react-8maqeb.stackblitz.io)
