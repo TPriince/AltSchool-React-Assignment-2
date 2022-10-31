@@ -6,33 +6,18 @@ import useFetch from '../hooks/useFetch';
 
 function UsersList() {
   const [page, setPage] = useState(1);
-  // const { loading, error, data } = useFetch(
-  //   `https://randomuser.me/api/?page=${page}&results=10&seed=abc`
-  // );
+  
   const { loading, error, data } = useFetch(
     `https://randomuser.me/api/?results=1000&seed=abc`
   );
 
-  console.log({ loading, error, data });
-
-  // step1
   const PER_PAGE = 10;
-  // step2
+  
   const total = data?.results?.length;
-  // step3
+  
   const pages = Math.ceil(total / PER_PAGE);
-  // let page = 1
-  // Magic of pagination
-  // 1 * 10 - 10 = 0
-  // 2 * 10 - 10 = 10
-  // 3 * 10 - 10 = 20
-  // 1 * 5 - 5 = 0
-  // 2 * 5 - 5 = 5
-  // 3 * 5 - 5 = 10
+  
   const skip = page * PER_PAGE - PER_PAGE;
-  // console.log(skip, total);
-
-  // use the useEffect to make api call based on the page.
 
   if (loading) {
     return <>Loading...</>;
@@ -45,22 +30,9 @@ function UsersList() {
   return (
     <div className="App">
       <h3 className="title">List of Users</h3>
-      {/* TODO: another magic with Array.slice() */}
-      {/* slice(0, 10) */}
-      {/* slice(10, 20) */}
-      {/* slice(20, 30) */}
-
-      {/* 0, 0 + 5 slice(0, 5)*/}
-      {/* 10, 20 */}
-      {/* 20, 30 */}
-
-      {/* 0, 1*10 */}
-      {/* 10, 20 */}
-      {/* 20, 30 */}
 
       {data?.results
         .slice(skip, skip + PER_PAGE)
-        // .slice((page - 1) * PER_PAGE, page * PER_PAGE)
         .map((each, index) => {
           const name = `${each.name.title} ${each.name.first} ${each.name.last}`;
           return (
@@ -89,7 +61,7 @@ function UsersList() {
           next
         </button>
       }
-      {/* another magic here */}
+      
       {Array.from({ length: pages }, (value, index) => index + 1).map(
         (each) => (
           <button onClick={() => setPage(each)}>{each}</button>
@@ -104,7 +76,7 @@ export default function Users() {
   return (
     <>
       <h2>This is the users page</h2>
-      
+
       <UsersList />
 
       <Outlet />
